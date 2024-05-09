@@ -34,6 +34,9 @@ Execute shell
 echo "Commit that triggered this job"  
 git log -1 HEAD --oneline
 
+python3 test_add_two_numbers.py  
+python3 helloworld.py
+
 ## Next go to command line
 
 use 'ngrok http 8080' to open port 8080 to be public
