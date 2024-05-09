@@ -1,9 +1,2 @@
-def addTwoNumbers(a, b):
+def add_two_numbers(a, b):
     return a + b
-
-def subTwoNumbers(a, b):
-    return a - b
-
-def multTwoNumbers(a, b):
-    return a * b
-
