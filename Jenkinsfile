@@ -6,30 +6,23 @@ pipeline {
             steps {
                 // Your build steps here
                 echo 'Building...'
-                python3 helloworld.py
-              
+                sh 'python3 helloworld.py'
             }
         }
         stage('Test') {
             steps {
                 // Your test steps here
                 echo 'Testing...'
-                python3 test_add_two_numbers.py  
+                sh 'python3 test_add_two_numbers.py'
             }
         }
         stage('Deploy to Staging') {
-            when {
-                branch 'develop'
-            }
             steps {
                 // Your deployment steps here
                 echo 'Deploying to staging environment...'
             }
         }
         stage('Deploy to Production') {
-            when {
-                branch 'master'
-            }
             steps {
                 // Your deployment steps here
                 echo 'Deploying to production environment...'
