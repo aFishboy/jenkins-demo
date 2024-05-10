@@ -37,6 +37,10 @@ git log -1 HEAD --oneline
 python3 test_add_two_numbers.py  
 python3 helloworld.py
 
+## Pipeline Job
+
+lightweight checkout
+
 ## Next go to command line
 
 use 'ngrok http 8080' to open port 8080 to be public
