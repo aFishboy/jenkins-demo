@@ -5,7 +5,7 @@ from example_code import add_two_numbers
 class TestMathOperations(unittest.TestCase):
 
     def test_add_two_numbers(self):
-        result = add_two_numbers(5, 5)
+        result = add_two_numbers(3, 5)
         self.assertEqual(result, 8, "Expected sum of 3 + 5 to be 8")
 
     def test_add_two_numbers_negative(self):
