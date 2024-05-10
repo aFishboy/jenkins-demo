@@ -1,20 +1,6 @@
 pipeline {
     agent any
     
-    options {
-        // Specify Git checkout options
-        scm {
-            git {
-                // Configure Git repository URL
-                remote {
-                    url 'your_git_repository_url_here'
-                }
-                // Fetch changes from all branches
-                refspec '+refs/heads/*:refs/remotes/origin/*'
-            }
-        }
-    }
-    
     stages {
         stage('Build') {
             steps {
