@@ -1,23 +1,25 @@
 # jenkins-demo
 
 Example repository for ECS 161 Programming Tools Live Demo
+
+`cd` to the cloned working directory:
+`cd jenkins-demo`
 ```bash
 docker build -t j-image .
 ```
 ```bash
 docker run \
-  j-image \
-  --name j-container \
-  --volume jenkins_home:/var/jenkins_home \
+  --detach \
+  --restart=on-failure \
+  --env DOCKER_TLS_VERIFY=1 \
+  --env DOCKER_HOST=tcp://docker:2376 \
+  --env DOCKER_CERT_PATH=/certs/client \
   --volume jenkins-data:/var/jenkins_home \
   --volume jenkins-docker-certs:/certs/client:ro \
   --publish 8080:8080 \
-  --publish 50000:50000
-  --restart=on-failure \
-  --detach \
-  --env DOCKER_HOST=tcp://docker:2376 \
-  --env DOCKER_CERT_PATH=/certs/client \
-  --env DOCKER_TLS_VERIFY=1 \
+  --publish 50000:50000 \
+  --name j-container \
+  j-image
 ```
 
 ## To get the initial admin password use
@@ -60,31 +62,64 @@ This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
 5. Then you should be prompted for a series of setups.
 6. After the setup, you will see the Jenkins Web UI.
 
-## Next create a freestyle job
+## Freestyle Project
+1. Click `Create a job` or `New Item` (left bar)
+2. Give a name such as `<demo>`
+3. Choose `Freestyle project` below
+4. Select `Configure` in the left-hand side menu
+5. Refer below for further configuration
 
-### Source Code Management  
+### Source Code Management
 
-Git  
-url as the http clone with .git at the end  
-branch blank  
+Select `Git`
+- [ ] None
+- [x] Git
+- Repository URL: `https://github.com/aFishboy/jenkins-demo`
+- Branches to build: `main`
 
 ### Build Triggers
 
-GitHub hook trigger for GITScm polling
+- [x] GitHub hook trigger for GITScm polling
 
 ### Build Steps
 
-Execute shell
-
+in the dropdown menu, select `Execute shell`
+Copy and paste the following script in the command textbox:
+```
 echo "Commit that triggered this job"  
 git log -1 HEAD --oneline
 
 python3 test_add_two_numbers.py  
 python3 helloworld.py
+```
+
+Click `Save`, then you should be redirect back to the `demo`'s `Status` page
+
+### RUNNNN!
+On the left-hand side bar, click `Build Now`
+You will see a new "build" in the `Build History`
+You can click on it and see the output of this build by clicking `Console Output`
 
 ## Pipeline Job
+1. Click `Create a job` or `New Item` (left bar)
+2. Give a name such as `<demo-pipeline>`
+3. Choose `Pipeline` below
+4. Select `Configure` in the left-hand side menu
+5. Refer below for further configuration
 
-lightweight checkout
+### Pipeline Configuration
+Scroll all the way down
+1. In the `Definition`'s dropdown menu, choose `Pipeline script from SCM`
+2. Repository URL: `https://github.com/aFishboy/jenkins-demo`
+3. Branches to build: `*/main` or just `main`
+4. Uncheck `lightweight checkout`
+
+Click `Save`, then you should be redirect back to the `demo-pipeline`'s `Status` page
+
+### RUNNNN!
+On the left-hand side bar, click `Build Now`
+You will see a new "build" in the `Build History`
+You can click on it and see the output of this build by clicking `Console Output`
 
 ## Next go to command line
 
