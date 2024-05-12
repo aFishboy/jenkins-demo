@@ -1,21 +1,28 @@
 # jenkins-demo
 
 Example repository for ECS 161 Programming Tools Live Demo
-
+```
 docker build -t j-image .
-
+```
+```
 docker run --name j-container --restart=on-failure --detach `
   --network jenkins --env DOCKER_HOST=tcp://docker:2376 `
   --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 `
   --volume jenkins-data:/var/jenkins_home `
   --volume jenkins-docker-certs:/certs/client:ro `
   --publish 8080:8080 --publish 50000:50000 j-image
+```
 
-## To get inital admin password use
-
+## To get the initial admin password use
+```
 docker exec j-container cat /var/jenkins_home/secrets/initialAdminPassword
+```
+or
+```
+docker logs j-container
+```
 
-## Next create freestyle job
+## Next create a freestyle job
 
 ### Source Code Management  
 
