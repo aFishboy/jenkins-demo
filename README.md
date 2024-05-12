@@ -3,7 +3,9 @@
 Example repository for ECS 161 Programming Tools Live Demo
 
 `cd` to the cloned working directory:
-`cd jenkins-demo`
+```bash
+cd jenkins-demo
+```
 ```bash
 docker build -t j-image .
 ```
