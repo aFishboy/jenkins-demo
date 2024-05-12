@@ -49,6 +49,8 @@ This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
 2024-05-12 19:48:20.573+0000 [id=33]    INFO    jenkins.InitReactorRunner$1#onAttained: Completed initialization
 ...
 ```
+**🚩Note**: It may be fine if you see different output, it may take some time to fully initialize Jenkins.\
+Just hang for a bit, and run again.
 
 ## Jenkins Web UI
 1. Go to `localhost:8080` in any browser (if the port is not conflicted with other software).
