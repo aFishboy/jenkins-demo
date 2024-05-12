@@ -1,26 +1,64 @@
 # jenkins-demo
 
 Example repository for ECS 161 Programming Tools Live Demo
-```
+```bash
 docker build -t j-image .
 ```
-```
-docker run --name j-container --restart=on-failure --detach `
-  --network jenkins --env DOCKER_HOST=tcp://docker:2376 `
-  --env DOCKER_CERT_PATH=/certs/client --env DOCKER_TLS_VERIFY=1 `
-  --volume jenkins-data:/var/jenkins_home `
-  --volume jenkins-docker-certs:/certs/client:ro `
-  --publish 8080:8080 --publish 50000:50000 j-image
+```bash
+docker run \
+  j-image \
+  --name j-container \
+  --volume jenkins_home:/var/jenkins_home \
+  --volume jenkins-data:/var/jenkins_home \
+  --volume jenkins-docker-certs:/certs/client:ro \
+  --publish 8080:8080 \
+  --publish 50000:50000
+  --restart=on-failure \
+  --detach \
+  --env DOCKER_HOST=tcp://docker:2376 \
+  --env DOCKER_CERT_PATH=/certs/client \
+  --env DOCKER_TLS_VERIFY=1 \
 ```
 
 ## To get the initial admin password use
-```
+```bash
 docker exec j-container cat /var/jenkins_home/secrets/initialAdminPassword
 ```
 or
-```
+```bash
 docker logs j-container
 ```
+look for the logs for lines of stars:
+```bash output
+...
+2024-05-12 19:48:16.576+0000 [id=33]    INFO    jenkins.install.SetupWizard#init:
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+Jenkins initial setup is required. An admin user has been created and a password generated.
+Please use the following password to proceed to installation:
+
+4058081dce434bc88ced0c02ea3f8433
+
+This may also be found at: /var/jenkins_home/secrets/initialAdminPassword
+
+*************************************************************
+*************************************************************
+*************************************************************
+
+2024-05-12 19:48:20.573+0000 [id=33]    INFO    jenkins.InitReactorRunner$1#onAttained: Completed initialization
+...
+```
+
+## Jenkins Web UI
+1. Go to `localhost:8080` in any browser (if the port is not conflicted with other software).
+2. You should see a prompt for the initial password.
+3. Copy and paste the generated password you see in **logs**.
+4. In this case, copy and paste *4058081dce434bc88ced0c02ea3f8433*.
+5. Then you should be prompted for a series of setups.
+6. After the setup, you will see the Jenkins Web UI.
 
 ## Next create a freestyle job
 
