@@ -23,8 +23,8 @@ pipeline {
                     println branchName
                     withCredentials([usernamePassword(credentialsId: 'github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_EMAIL')]) {
                         sh "git config --global user.email ${GIT_EMAIL}"
-                        sh 'git config --global user.name '
-                        sh 'git checkout main aFishboy'
+                        sh 'git config --global user.name aFishboy'
+                        sh 'git checkout main'
                         sh "git merge --no-ff ${GIT_BRANCH}"
                         sh 'git push'
                     }
