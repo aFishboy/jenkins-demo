@@ -25,6 +25,7 @@ pipeline {
                         sh "git config --global user.email ${GIT_USERNAME}"
                         sh 'git checkout main'
                         sh "git merge --no-ff ${GIT_BRANCH}"
+                        sh 'git push'
                     }
                 }
             }
