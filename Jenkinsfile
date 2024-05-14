@@ -24,7 +24,7 @@ pipeline {
                     withCredentials([usernamePassword(credentialsId: 'github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh "git config --global user.email ${GIT_USERNAME}"
                         sh 'git checkout main'
-                        sh "git merge --no-ff ${branchName}"
+                        sh "git merge --no-ff ${GIT_BRANCH}"
                     }
                 }
             }
