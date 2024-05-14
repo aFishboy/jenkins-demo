@@ -11,7 +11,7 @@ pipeline {
         stage('Test') {
             steps {
                 echo 'Testing...'
-                sh 'python3 test_add_two_numbers.py'
+                sh 'python3 test_homepage.py'
             }
         }
         stage('Deploy') {
