@@ -21,7 +21,7 @@ pipeline {
                     println GIT_BRANCH
                     def branchName = GIT_BRANCH.tokenize('/').last()
                     println branchName
-                    withCredentials([usernamePassword(credentialsId: 'your_git_credentials_id', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    withCredentials([usernamePassword(credentialsId: 'github_creds', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                         sh "git config --global user.email ${GIT_EMAIL}"
                         sh 'git checkout main'
                         sh "git merge --no-ff ${branchName}"
