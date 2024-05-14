@@ -10,6 +10,10 @@ pipeline {
         stage('Install Streamlit') {
             steps {
                 script {
+                    // Update package lists and install Python and python3-venv
+                    sh 'apt update'
+                    sh 'apt install -y python3 python3-venv'
+                    
                     // Create and activate a virtual environment (optional)
                     sh 'python3 -m venv venv'
                     sh 'source venv/bin/activate'
