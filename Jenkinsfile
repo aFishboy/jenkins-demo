@@ -15,9 +15,6 @@ pipeline {
             }
         }
         stage('Merge Changes') {
-            when {
-                expression { currentBuild.result == 'SUCCESS' }
-            }
             steps {
                 echo 'Merging changes into main branch...'
                 sh 'git checkout main' // Switch to main branch
