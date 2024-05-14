@@ -9,6 +9,16 @@ cd jenkins-demo
 ```bash
 docker build -t j-image .
 ```
+Windows
+```bash
+docker run `
+  --detach `
+  --volume jenkins_home:/var/jenkins_home `
+  --publish 9090:8080 `
+  --name j-container `
+  j-image
+```
+MacOS / Linux
 ```bash
 docker run \
   --detach \
