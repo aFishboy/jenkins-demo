@@ -16,16 +16,19 @@ pipeline {
         }
         stage('Merge Changes') {
             steps {
-                echo 'Merging changes into main branch...'
-                println GIT_BRANCH
-                def branchName = GIT_BRANCH.tokenize('/').last()
-                withCredentials([usernamePassword(credentialsId: 'your_git_credentials_id', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh "git config --global user.email ${GIT_EMAIL}"
-                    sh 'git checkout main'
-                    sh "git merge --no-ff ${branchName}"
+                script {
+                    echo 'Merging changes into main branch...'
+                    println GIT_BRANCH
+                    def branchName = GIT_BRANCH.tokenize('/').last()
+                    withCredentials([usernamePassword(credentialsId: 'your_git_credentials_id', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                        sh "git config --global user.email ${GIT_EMAIL}"
+                        sh 'git checkout main'
+                        sh "git merge --no-ff ${branchName}"
+                    }
                 }
             }
         }
+
         stage('Deploy') {
             steps {
                 echo 'Deploying to production environment...'
