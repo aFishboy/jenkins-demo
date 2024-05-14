@@ -1,9 +1,5 @@
 pipeline {
     agent any
-
-    environment {
-     branchName = "${env.GIT_BRANCH.split('/').size() == 1 ? env.GIT_BRANCH.split('/')[-1] : env.GIT_BRANCH.split('/')[1..-1].join('/')}"
-    }
     
     stages {
         stage('Build') {
@@ -23,9 +19,9 @@ pipeline {
                 echo 'Merging changes into main branch...'
                 println GIT_BRANCH
                 withCredentials([usernamePassword(credentialsId: 'your_git_credentials_id', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
-                    sh "git config --global user.email '${GIT_EMAIL}'"
+                    sh "git config --global user.email ${GIT_EMAIL}"
                     sh 'git checkout main'
-                    sh 'git merge --no-ff ${branchName}'
+                    sh "git merge --no-ff ${GIT_BRANCH}"
                 }
             }
         }
