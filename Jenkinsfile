@@ -24,8 +24,10 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Running tests...'
-                sh 'python3 test_homepage.py'
+                script {
+                    // Activate the virtual environment before running tests
+                    sh '. venv/bin/activate && python3 test_homepage.py'
+                }
             }
         }
         stage('Build Docker Image') {
