@@ -17,14 +17,12 @@ pipeline {
         stage('Merge Changes') {
             steps {
                 echo 'Merging changes into main branch...'
+                echo "Current branch: ${env.BRANCH_NAME}"
                 sh 'git checkout main' // Switch to main branch
                 sh 'git merge --no-ff ${env.BRANCH_NAME}' // Merge current branch into main
             }
         }
         stage('Deploy') {
-            when {
-                expression { currentBuild.result == 'SUCCESS' }
-            }
             steps {
                 echo 'Deploying to production environment...'
                 // Your deployment steps here
