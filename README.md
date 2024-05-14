@@ -14,7 +14,7 @@ Windows
 docker run `
   --detach `
   --volume jenkins_home:/var/jenkins_home `
-  --publish 9090:8080 `
+  --publish 8080:8080 `
   --name j-container `
   j-image
 ```
