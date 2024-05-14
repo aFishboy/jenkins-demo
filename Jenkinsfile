@@ -10,12 +10,11 @@ pipeline {
         stage('Prepare Environment') {
             steps {
                 echo 'Setting up virtual environment...'
-                sh 'python3 -m venv venv'
+                sh 'python -m venv venv'
                 echo 'Activating virtual environment...'
                 sh 'source venv/bin/activate && pip install -r requirements.txt'
             }
         }
-
         stage('Test') {
             steps {
                 echo 'Running tests...'
