@@ -7,6 +7,15 @@ pipeline {
                 echo "If a build is needed"
             }
         }
+        stage('Prepare Environment') {
+            steps {
+                echo 'Setting up virtual environment...'
+                sh 'python3 -m venv venv'
+                echo 'Activating virtual environment...'
+                sh 'source venv/bin/activate && pip install -r requirements.txt'
+            }
+        }
+
         stage('Test') {
             steps {
                 echo 'Running tests...'
