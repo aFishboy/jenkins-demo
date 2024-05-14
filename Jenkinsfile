@@ -17,9 +17,11 @@ pipeline {
         stage('Merge Changes') {
             steps {
                 echo 'Merging changes into main branch...'
-                echo "Current branch: ${GIT_BRANCH}"
-                sh 'git checkout main' // Switch to main branch
-                sh 'git merge --no-ff ${GIT_BRANCH}' // Merge current branch into main
+                withCredentials([usernamePassword(credentialsId: 'your_git_credentials_id', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
+                    sh "git config --global user.email '${GIT_EMAIL}'"
+                    sh 'git checkout main'
+                    sh 'git merge --no-ff ${GIT_BRANCH}'
+                }
             }
         }
         stage('Deploy') {
