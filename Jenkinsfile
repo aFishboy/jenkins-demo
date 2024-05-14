@@ -21,6 +21,7 @@ pipeline {
         stage('Merge Changes') {
             steps {
                 echo 'Merging changes into main branch...'
+                echo ${branchName}
                 withCredentials([usernamePassword(credentialsId: 'your_git_credentials_id', passwordVariable: 'GIT_PASSWORD', usernameVariable: 'GIT_USERNAME')]) {
                     sh "git config --global user.email '${GIT_EMAIL}'"
                     sh 'git checkout main'
