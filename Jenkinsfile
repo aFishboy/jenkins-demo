@@ -4,8 +4,8 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                echo 'Building...'
-                sh 'python3 helloworld.py'
+                echo 'Installing dependencies...'
+                sh 'pip install -r requirements.txt'
             }
         }
         stage('Test') {
