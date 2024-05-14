@@ -15,8 +15,7 @@ pipeline {
                     sh 'apt install -y python3 python3-venv'
                     
                     // Create and activate a virtual environment (optional)
-                    sh 'python3 -m venv venv'
-                    sh 'source venv/bin/activate'
+                    sh 'python3 -m venv venv && . venv/bin/activate'
                     
                     // Install Streamlit
                     sh 'pip install streamlit'
