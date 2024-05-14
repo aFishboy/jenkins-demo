@@ -1,6 +1,6 @@
 # test_math_operations.py
 import unittest
-from example_code import add_two_numbers
+from homepage import add_two_numbers
 
 class TestMathOperations(unittest.TestCase):
 

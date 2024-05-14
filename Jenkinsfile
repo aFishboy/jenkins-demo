@@ -17,7 +17,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 echo 'Deploying to production environment...'
-                // Your deployment steps here
+                sh 'streamlit run homepage.py'
             }
         }
     }
