@@ -14,7 +14,8 @@ WORKDIR /app
 COPY . .
 
 # Install any needed packages specified in requirements.txt
-RUN pip install -r requirements.txt
+
+# RUN pip install -r requirements.txt
 
 # Expose port 8501 to the outside world
 EXPOSE 8501

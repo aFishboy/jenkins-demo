@@ -17,7 +17,8 @@ pipeline {
         stage('Build Docker Image') {
             steps {
                 script {
-                    docker.build("streamlit-app:latest', '-f ${/streamlit_reqs} .")
+                    // Use correct quotes and interpolate the Dockerfile path
+                    docker.build("streamlit-app:latest", "-f ${env.WORKSPACE}/streamlit_reqs .")
                 }
             }
         }
