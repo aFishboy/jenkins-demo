@@ -14,10 +14,23 @@ pipeline {
                 sh 'python3 test_homepage.py'
             }
         }
-        stage('Deploy') {
+        stage('Build Docker Image') {
             steps {
-                echo 'Deploying to production environment...'
-                sh 'streamlit run homepage.py'
+                script {
+                    docker.build("streamlit-app:latest', '-f ${/streamlit_reqs} .")
+                }
+            }
+        }
+        stage('Deploy Docker Container') {
+            steps {
+                script {
+                    // Stop and remove existing containers with the same name
+                    sh 'docker stop streamlit-app || true'
+                    sh 'docker rm streamlit-app || true'
+                    
+                    // Run the Docker container
+                    docker.image('streamlit-app:latest').run('-p 8501:8501 -d')
+                }
             }
         }
     }
