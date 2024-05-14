@@ -19,7 +19,7 @@ pipeline {
                 echo 'Merging changes into main branch...'
                 echo "Current branch: ${GIT_BRANCH}"
                 sh 'git checkout main' // Switch to main branch
-                sh 'git merge --no-ff ${env.BRANCH_NAME}' // Merge current branch into main
+                sh 'git merge --no-ff ${GIT_BRANCH}' // Merge current branch into main
             }
         }
         stage('Deploy') {
