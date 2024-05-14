@@ -10,7 +10,7 @@ pipeline {
         }
         stage('Test') {
             steps {
-                echo 'Testing...'
+                echo 'Running tests...'
                 sh 'python3 test_homepage.py'
             }
         }
