@@ -14,11 +14,11 @@ pipeline {
                     sh 'apt update'
                     sh 'apt install -y python3 python3-venv'
                     
-                    // Create and activate a virtual environment (optional)
-                    sh 'python3 -m venv venv && . venv/bin/activate'
+                    // Create a virtual environment
+                    sh 'python3 -m venv venv'
                     
-                    // Install Streamlit
-                    sh 'pip install streamlit'
+                    // Activate the virtual environment and install Streamlit
+                    sh '. venv/bin/activate && pip install streamlit'
                 }
             }
         }
