@@ -7,12 +7,16 @@ pipeline {
                 echo "If a build is needed"
             }
         }
-        stage('Prepare Environment') {
+        stage('Install Streamlit') {
             steps {
-                echo 'Setting up virtual environment...'
-                sh 'python -m venv venv'
-                echo 'Activating virtual environment...'
-                sh 'source venv/bin/activate && pip install -r requirements.txt'
+                script {
+                    // Create and activate a virtual environment (optional)
+                    sh 'python3 -m venv venv'
+                    sh 'source venv/bin/activate'
+                    
+                    // Install Streamlit
+                    sh 'pip install streamlit'
+                }
             }
         }
         stage('Test') {
